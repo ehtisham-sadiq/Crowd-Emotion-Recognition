@@ -53,8 +53,6 @@ The model aims to analyze visual cues from a crowd to infer the overall emotiona
 - ![Ehtisham Sadiq](https://github.com/ehtisham-sadiq)
 - ![Dilbar]()
 - ![Zunaira]()
-- ![Ansha]()
-
 
 
 
