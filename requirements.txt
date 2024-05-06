@@ -4,3 +4,7 @@ numpy
 pandas
 scikit-learn
 pytorch
+uvicorn
+tensorflow
+matplotlib
+opencv-python-headless
