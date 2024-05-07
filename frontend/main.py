@@ -84,8 +84,8 @@ elif option == "Display Name":
 # Footer instructions
 st.markdown("""
 <footer style='text-align:center; position: fixed; bottom: 0; width: 50%;'>
-    <p>Developed by <b> Zunaiara</b> and <b>Darban</b>. Under the supervision of Dr. Ali Khan</p>
-    <p>Thank you for visiting!</p>
+    <p><b>The future of emotional intelligence | Crowd Emotion Recognizer | Developed by Zunaira and Darban |</b></p>
+    <p><b>Supervised by Dr. Ali Raza!</b></p>
 </footer>
 """, unsafe_allow_html=True)
 
