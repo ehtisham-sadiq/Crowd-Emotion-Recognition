@@ -45,7 +45,6 @@ if uploaded_file is not None:
 
 add_boundary()
 
-# Section for capturing or recording image and video
 st.markdown("##### Capture or Record Image and Video")
 capture_col1, capture_col2 = st.columns(2)
 

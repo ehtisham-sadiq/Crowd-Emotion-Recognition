@@ -3,6 +3,7 @@ import numpy as np
 import seaborn as sns
 import streamlit as st
 import matplotlib.pyplot as plt
+from tensorflow.keras.preprocessing import image as keras_image # type: ignore
 from keras.models import load_model  # type: ignore
 from keras.preprocessing import image # type: ignore
 from tensorflow.keras.preprocessing.image import ImageDataGenerator # type: ignore
@@ -22,49 +23,6 @@ def emotion_analysis(emotions):
     plt.ylabel('Percentage')
     plt.title('Emotion Analysis')
     plt.show()
-
-# def emotion_analysis(emotions):
-#     objects = ('angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral')
-#     y_pos = np.arange(len(objects))
-    
-#     sns.set(style="whitegrid")
-#     fig, ax = plt.subplots()
-#     sns.barplot(x=objects, y=emotions, palette="viridis", ax=ax)
-#     ax.set_ylabel('Percentage')
-#     ax.set_title('Emotion Analysis')
-    
-#     st.pyplot(fig)
-
-# Function to process image and detect emotion 
-# def detect_emotion_in_image(model, image):
-#     d = {0:"angry",1:"disgust",2:"fear",3:"happiness",4:"sad",5:"surprise",6:"neutral"}
-#     face_cascade = cv2.CascadeClassifier('../opencv/haarcascade_frontalface_alt.xml')
-#     # true_image = image.load_img(image) # actual image
-#     t_image = cv2.imread(image)
-#     gray = cv2.cvtColor(t_image,cv2.COLOR_BGR2GRAY)
-#     faces = face_cascade.detectMultiScale(gray,1.1,4)
-#     if(len(faces) == 0):
-#         exit()
-#     for (x,y,w,h) in faces:
-#         cv2.rectangle(gray,(x,y),(x+w,y+h),(255,0,0),2)
-#         start_row,end_row,start_col,end_col = y,y+h,x,x+h
-#     croppedimage = gray[start_row:end_row,start_col:end_col]
-#     img = cv2.resize(croppedimage,(48,48))
-#     x = image.img_to_array(img)
-#     x = np.expand_dims(x, axis = 0)
-#     x /= 255
-#     custom = model.predict(x)
-#     emotion_analysis(custom[0])
-#     print(custom[0])
-#     emt = list(custom[0])
-#     idx = emt.index(max(emt))
-#     emotion = d[idx]
-#     print(f"Emotion in the image is : {emotion}")
-#     return emotion
-
-import cv2
-import numpy as np
-from tensorflow.keras.preprocessing import image as keras_image # type: ignore
 
 def detect_emotion_in_image(model, image_path):
     d = {0:"angry",1:"disgust",2:"fear",3:"happiness",4:"sad",5:"surprise",6:"neutral"}
@@ -146,10 +104,6 @@ def getFrame(seconds, vidcap, model, face_cascade, d, dcount):
     return hasFrames
 
 
-
-
-
-# Function to process video and detect emotion 
 def detect_emotion_in_video(model, video_path):
     # videoFile = "/Users/ehtishamsadiq/Crowd-Emotion-Recognition/backend/data/emotion_recognition_test_video.mp4"
     vidcap = cv2.VideoCapture(video_path)
@@ -192,3 +146,42 @@ def detect_emotion_in_video(model, video_path):
             emotion = key
     emotion_analysis(values)
     return emotion
+
+# def emotion_analysis(emotions):
+#     objects = ('angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral')
+#     y_pos = np.arange(len(objects))
+    
+#     sns.set(style="whitegrid")
+#     fig, ax = plt.subplots()
+#     sns.barplot(x=objects, y=emotions, palette="viridis", ax=ax)
+#     ax.set_ylabel('Percentage')
+#     ax.set_title('Emotion Analysis')
+    
+#     st.pyplot(fig)
+
+# Function to process image and detect emotion 
+# def detect_emotion_in_image(model, image):
+#     d = {0:"angry",1:"disgust",2:"fear",3:"happiness",4:"sad",5:"surprise",6:"neutral"}
+#     face_cascade = cv2.CascadeClassifier('../opencv/haarcascade_frontalface_alt.xml')
+#     # true_image = image.load_img(image) # actual image
+#     t_image = cv2.imread(image)
+#     gray = cv2.cvtColor(t_image,cv2.COLOR_BGR2GRAY)
+#     faces = face_cascade.detectMultiScale(gray,1.1,4)
+#     if(len(faces) == 0):
+#         exit()
+#     for (x,y,w,h) in faces:
+#         cv2.rectangle(gray,(x,y),(x+w,y+h),(255,0,0),2)
+#         start_row,end_row,start_col,end_col = y,y+h,x,x+h
+#     croppedimage = gray[start_row:end_row,start_col:end_col]
+#     img = cv2.resize(croppedimage,(48,48))
+#     x = image.img_to_array(img)
+#     x = np.expand_dims(x, axis = 0)
+#     x /= 255
+#     custom = model.predict(x)
+#     emotion_analysis(custom[0])
+#     print(custom[0])
+#     emt = list(custom[0])
+#     idx = emt.index(max(emt))
+#     emotion = d[idx]
+#     print(f"Emotion in the image is : {emotion}")
+#     return emotion
