@@ -132,3 +132,6 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
+st.markdown("##### Navigation")
+if st.button("Go to Dashboard"):
+    st.write("You can visit the dashboard [here](dashboard)")
