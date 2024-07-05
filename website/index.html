@@ -1,0 +1,272 @@
+<!-- !DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crowd Emotion Recognition</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="text-center">
+            <h1>Crowd Emotion Recognition</h1>
+            <p>This project implements a system for crowd emotion recognition, aiming to automatically classify the emotions present within a crowd image or video.</p>
+            <div class="upload-section">
+                <div class="btn-group-vertical mb-3">
+                    <button class="btn btn-primary" id="upload-image-btn">Upload image</button>
+                    <button class="btn btn-primary" id="upload-video-btn">Upload video</button>
+                    <button class="btn btn-secondary" id="capture-image-btn">Capture image</button>
+                    <button class="btn btn-secondary" id="capture-video-btn">Capture video</button>
+                </div>
+                <input type="file" id="file-input" style="display: none;" accept="image/*,video/*">
+                <div class="preview">
+                    <div class="display-results" id="results">
+                        <h4>Detected Emotion</h4>
+                    </div>
+                </div>
+                <button class="btn btn-info mt-3" id="display-results-btn">Display results</button>
+                <div class="dashboard-link mt-3">
+                    <button class="btn btn-link" id="dashboard-btn">Dashboard Here</button>
+                </div>
+            </div>
+            <footer class="footer mt-5">
+                <p>The future of emotional intelligence | Crowd Emotion Recognition | Developed by Zunaira and Darban | Supervised by Dr. Syed Ali Raza</p>
+            </footer>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
+ -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crowd Emotion Recognition</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="text-center">
+            <h1>Crowd Emotion Recognition</h1>
+            <p>This project implements a system for crowd emotion recognition, aiming to automatically classify the emotions present within a crowd image or video.</p>
+        </div>
+
+        <!-- First Section -->
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="btn-group-vertical mb-3 w-100">
+                    <button class="btn btn-primary mb-2" id="upload-image-btn"><i class="fas fa-upload"></i> Upload Image</button>
+                    <button class="btn btn-primary mb-2" id="upload-video-btn"><i class="fas fa-upload"></i> Upload Video</button>
+                    <button class="btn btn-secondary mb-2" id="capture-image-btn"><i class="fas fa-camera"></i> Capture Image</button>
+                    <button class="btn btn-secondary mb-2" id="capture-video-btn"><i class="fas fa-video"></i> Capture Video</button>
+                </div>
+                <input type="file" id="file-input" style="display: none;" accept="image/*,video/*">
+            </div>
+            <div class="col-md-8">
+                <div class="preview border p-3">
+                    <h4>Detected Emotion</h4>
+                    <div id="image-video-preview" style="max-height: 300px; width: 100%; overflow: hidden;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Section -->
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <button class="btn btn-info mb-3 w-100" id="display-results-btn"><i class="fas fa-chart-bar"></i> Get Results</button>
+                <a href="dashboard.html" class="btn btn-link w-100" id="dashboard-btn"><i class="fas fa-tachometer-alt"></i> Go to Dashboard</a>
+            </div>
+            <div class="col-md-8">
+                <div class="border p-3">
+                    <h4>Emotion Analysis</h4>
+                    <p id="detected-emotion">Emotion detected by the model will be displayed here.</p>
+                    <div id="emotion-barplot" style="height: 300px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer mt-5">
+            <div class="bg-dark text-white p-3 text-center">
+                <p>The future of emotional intelligence | Crowd Emotion Recognition</p>
+                <p>Developed by Zunaira and Darban | Supervised by Dr. Syed Ali Raza</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
+
+
+
+
+<!-- 
+now , backend is runing and your next task is to connect backend and frontend .
+
+This complete code of js file, update this according to integration:
+
+document.addEventListener('DOMContentLoaded', function() {
+    const uploadImageButton = document.getElementById('upload-image-btn');
+    const uploadVideoButton = document.getElementById('upload-video-btn');
+    const captureImageButton = document.getElementById('capture-image-btn');
+    const captureVideoButton = document.getElementById('capture-video-btn');
+    const fileInput = document.getElementById('file-input');
+    const imageVideoPreview = document.getElementById('image-video-preview');
+    const displayResultsButton = document.getElementById('display-results-btn');
+    const dashboardButton = document.getElementById('dashboard-btn');
+    const resultsDiv = document.getElementById('results');
+    const emotionBarplot = document.getElementById('emotion-barplot');
+
+    // Function to handle file uploads
+    function handleFileUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const fileType = file.type;
+            const fileReader = new FileReader();
+
+            fileReader.onload = function(e) {
+                const fileURL = e.target.result;
+                displayFile(fileURL, fileType);
+            };
+
+            fileReader.readAsDataURL(file);
+        }
+    }
+
+    // Function to display the uploaded file
+    function displayFile(fileURL, fileType) {
+        imageVideoPreview.innerHTML = '';
+
+        if (fileType.startsWith('image/')) {
+            const img = document.createElement('img');
+            img.src = fileURL;
+            img.alt = 'Uploaded Image';
+            imageVideoPreview.appendChild(img);
+        } else if (fileType.startsWith('video/')) {
+            const video = document.createElement('video');
+            video.src = fileURL;
+            video.controls = true;
+            imageVideoPreview.appendChild(video);
+        }
+    }
+
+    // Event listeners for the buttons
+    uploadImageButton.addEventListener('click', function() {
+        fileInput.accept = 'image/*';
+        fileInput.click();
+    });
+
+    uploadVideoButton.addEventListener('click', function() {
+        fileInput.accept = 'video/*';
+        fileInput.click();
+    });
+
+    captureImageButton.addEventListener('click', function() {
+        alert('Capture Image functionality not yet implemented');
+        // Implement image capture functionality here
+    });
+
+    captureVideoButton.addEventListener('click', function() {
+        alert('Capture Video functionality not yet implemented');
+        // Implement video capture functionality here
+    });
+
+    fileInput.addEventListener('change', handleFileUpload);
+
+    // Display results on button click
+    displayResultsButton.addEventListener('click', function() {
+        // Replace with actual ML model integration
+        const detectedEmotion = 'Happy'; // Example emotion
+        const emotionScores = {
+            'Happy': 0.8,
+            'Sad': 0.1,
+            'Angry': 0.05,
+            'Surprised': 0.05
+        };
+
+        // Display detected emotion
+        resultsDiv.innerHTML = <h4>Detected Emotion: ${detectedEmotion}</h4>;
+
+        // Display emotion barplot
+        displayEmotionBarplot(emotionScores);
+    });
+
+    // Navigate to dashboard
+    dashboardButton.addEventListener('click', function() {
+        window.location.href = 'dashboard.html';
+    });
+
+    // Function to display the emotion barplot
+    function displayEmotionBarplot(emotionScores) {
+        const labels = Object.keys(emotionScores);
+        const data = Object.values(emotionScores);
+
+        const ctx = document.createElement('canvas');
+        emotionBarplot.innerHTML = '';
+        emotionBarplot.appendChild(ctx);
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Emotion Scores',
+                    data: data,
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+});
+
+
+This is code of our button to get result:
+      <div class="row mt-4">
+            <div class="col-md-4">
+                <button class="btn btn-info mb-3 w-100" id="display-results-btn"><i class="fas fa-chart-bar"></i> Get Results</button>
+                <a href="dashboard.html" class="btn btn-link w-100" id="dashboard-btn"><i class="fas fa-tachometer-alt"></i> Go to Dashboard</a>
+            </div>
+            <div class="col-md-8">
+                <div class="border p-3">
+                    <h4>Emotion Analysis</h4>
+                    <p id="detected-emotion">Emotion detected by the model will be displayed here.</p>
+                    <div id="emotion-barplot" style="height: 300px; width: 100%;"></div>
+                </div>
+            </div>
+        </div> -->
+
+
+<!-- NOTE: also modify it according to requirements. -->
